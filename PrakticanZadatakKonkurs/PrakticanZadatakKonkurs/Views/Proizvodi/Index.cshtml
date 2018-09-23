@@ -4,7 +4,8 @@
 }
 
 @* TABELA SA PODACIMA IZ JSON FAJLA *@
-<h2>Podaci iščitani iz JSON fajla</h2>
+<h3>Podaci iščitani iz JSON fajla</h3>
+<hr />
 <table class="table table-bordered table-striped">
     <tr>
         <th>Id</th>
@@ -25,14 +26,16 @@
             <td>@item.Kategorija</td>
             <td>@item.Proizvodjac</td>
             <td>@item.Dobavljac</td>
-            <td>@item.Cena.ToString("n2")</td>
+            <td>@item.Cena.ToString("n2") din</td>
         </tr>
     }
 
 </table>
 
 @* TABELA SA PODACIMA IZ BAZE *@
-<h2>Podaci iščitani iz baze</h2>
+<h3>Podaci iščitani iz baze</h3>
+<hr />
+<p>@Html.ActionLink("Dodaj", "Dodaj", "Proizvodi", new { @class = "btn btn-primary" })</p>
 <table class="table table-bordered table-striped">
     <tr>
         <th>Id</th>
@@ -54,7 +57,7 @@
             <td>@item.Kategorija</td>
             <td>@item.Proizvodjac</td>
             <td>@item.Dobavljac</td>
-            <td>@item.Cena.ToString("n2")</td>
+            <td>@item.Cena.ToString("n2") din</td>
             <td>@Html.ActionLink("Izmeni", "Izmena", "Proizvodi", new { id = item.ProizvodId }, new { @class = "btn btn-primary btn-xs" })</td>
         </tr>
     }

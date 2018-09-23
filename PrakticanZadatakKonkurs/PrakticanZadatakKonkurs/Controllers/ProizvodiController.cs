@@ -33,5 +33,44 @@ namespace PrakticanZadatakKonkurs.Controllers
 
             return View(proizvodi);
         }
+
+        //GET
+        public ActionResult Dodaj()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Metoda vrsi dodavanje novog proizvoda u bazu
+        /// </summary>
+        /// <param name="proizvod"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Dodaj(Proizvod proizvod)
+        {
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    db.Proizvodi.Add(proizvod);
+                    db.SaveChanges();
+
+                    ViewBag.Poruka = "Uspeh";
+                    ModelState.Clear();
+                    return View();
+                }
+                catch (Exception)
+                {
+                    ViewBag.Poruka = "Greska";
+                    return View();
+                }
+            }
+            ViewBag.Poruka = "Greska";
+            ModelState.Clear();
+            return View();
+        }
+        
+        
     }
 }

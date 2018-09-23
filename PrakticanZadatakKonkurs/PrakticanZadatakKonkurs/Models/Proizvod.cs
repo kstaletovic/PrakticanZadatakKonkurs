@@ -31,6 +31,7 @@ namespace PrakticanZadatakKonkurs.Models
         public string Dobavljac { get; set; }
 
         [Required(ErrorMessage = "Unesite cenu")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Cena sadrži samo brojeve")]
         public float Cena { get; set; }
     }
 }
