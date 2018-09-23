@@ -1,0 +1,62 @@
+﻿@model PrakticanZadatakKonkurs.ViewModels.ProizvodiViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@* TABELA SA PODACIMA IZ JSON FAJLA *@
+<h2>Podaci iščitani iz JSON fajla</h2>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Naziv</th>
+        <th>Opis</th>
+        <th>Kategorija</th>
+        <th>Proizvođač</th>
+        <th>Dobavljač</th>
+        <th>Cena</th>
+    </tr>
+
+    @foreach (var item in Model.ProizvodiJSON)
+    {
+        <tr>
+            <td>@item.ProizvodId</td>
+            <td>@item.Naziv</td>
+            <td>@item.Opis</td>
+            <td>@item.Kategorija</td>
+            <td>@item.Proizvodjac</td>
+            <td>@item.Dobavljac</td>
+            <td>@item.Cena.ToString("n2")</td>
+        </tr>
+    }
+
+</table>
+
+@* TABELA SA PODACIMA IZ BAZE *@
+<h2>Podaci iščitani iz baze</h2>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Naziv</th>
+        <th>Opis</th>
+        <th>Kategorija</th>
+        <th>Proizvođač</th>
+        <th>Dobavljač</th>
+        <th>Cena</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.ProizvodiBaza)
+    {
+        <tr>
+            <td>@item.ProizvodId</td>
+            <td>@item.Naziv</td>
+            <td>@item.Opis</td>
+            <td>@item.Kategorija</td>
+            <td>@item.Proizvodjac</td>
+            <td>@item.Dobavljac</td>
+            <td>@item.Cena.ToString("n2")</td>
+            <td>@Html.ActionLink("Izmeni", "Izmena", "Proizvodi", new { id = item.ProizvodId }, new { @class = "btn btn-primary btn-xs" })</td>
+        </tr>
+    }
+
+</table>

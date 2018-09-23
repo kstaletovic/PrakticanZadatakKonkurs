@@ -1,0 +1,21 @@
+﻿[
+  {
+    "ProizvodId": "1",
+    "Naziv": "Galaxy S8",
+    "Opis": "5.8\" 2960x1440 ekran; 12 MP / 8 MP kamere; RAM 4 GB",
+    "Kategorija": "Mobilni telefon",
+    "Proizvodjac": "Samsung",
+    "Dobavljac": "Samsung",
+    "Cena": "75000"
+
+  },
+  {
+    "ProizvodId": "2",
+    "Naziv": "Galaxy Tab S4",
+    "Opis": "10.5\" 2560x1600 ekran; 13 MP / 8 MP kamere; RAM 4 GB",
+    "Kategorija": "Tablet",
+    "Proizvodjac": "Samsung",
+    "Dobavljac": "Samsung",
+    "Cena": "95000"
+  }
+]
