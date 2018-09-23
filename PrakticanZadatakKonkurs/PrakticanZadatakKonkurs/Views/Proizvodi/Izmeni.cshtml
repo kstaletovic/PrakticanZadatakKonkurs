@@ -1,0 +1,102 @@
+﻿@model PrakticanZadatakKonkurs.Models.Proizvod
+@{
+    ViewBag.Title = "Izmeni";
+}
+
+@using (Html.BeginForm("Izmeni", "Proizvodi", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>Izmena proizvoda</h3>
+        <hr />
+        @Html.HiddenFor(p => p.ProizvodId)
+
+        <div class="form-group">
+            @Html.LabelFor(p => p.Naziv, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(p => p.Naziv, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(p => p.Naziv, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(p => p.Opis, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(p => p.Opis, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(p => p.Opis, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(p => p.Kategorija, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(p => p.Kategorija, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(p => p.Kategorija, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(p => p.Proizvodjac, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(p => p.Proizvodjac, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(p => p.Proizvodjac, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(p => p.Dobavljac, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(p => p.Dobavljac, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(p => p.Dobavljac, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(p => p.Cena, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(p => p.Cena, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(p => p.Cena, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Izmeni" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Styles{
+
+    <link href="~/Content/sweetalert2.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/Scripts/sweetalert2.min.js"></script>
+    <script>
+        //Sweetalert poruka za uspesnu/neuspesnu izmenu postojeceg proizvoda
+        $(function () {
+            var poruka = "@ViewBag.Poruka";
+            if (poruka == "Uspeh") {
+                swal({
+                    title: 'Izmenjeno!',
+                    text: 'Uspešno ste izmenili proizvod.',
+                    type: 'success',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.value) {
+                        window.location.href = "/Proizvodi/Index";
+                    }
+                })
+            }
+            else if (poruka == "Greska") {
+                swal(
+                   'Greška!',
+                   'Došlo je do greške. Pokušajte kasnije.',
+                   'error'
+                    )
+            }
+        })
+    </script>
+}

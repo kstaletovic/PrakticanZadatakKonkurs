@@ -3,8 +3,10 @@ using PrakticanZadatakKonkurs.Models;
 using PrakticanZadatakKonkurs.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -63,6 +65,7 @@ namespace PrakticanZadatakKonkurs.Controllers
                 catch (Exception)
                 {
                     ViewBag.Poruka = "Greska";
+                    ModelState.Clear();
                     return View();
                 }
             }
@@ -70,7 +73,58 @@ namespace PrakticanZadatakKonkurs.Controllers
             ModelState.Clear();
             return View();
         }
-        
-        
+
+        //GET
+        public ActionResult Izmeni(int? id)
+        {
+            if(id==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Proizvod proizvod = db.Proizvodi.Find(id);
+            if(proizvod==null)
+            {
+                return HttpNotFound();
+            }
+            return View(proizvod);
+        }
+
+        /// <summary>
+        /// Metoda vrsi izmenu postojeceg proizvoda u bazi
+        /// </summary>
+        /// <param name="proizvod"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Izmeni(Proizvod proizvod)
+        {
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    db.Entry(proizvod).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    ViewBag.Poruka = "Uspeh";
+                    return View();
+                }
+                catch (Exception)
+                {
+                    ViewBag.Poruka = "Greska";
+                    return View();
+                }
+            }
+            ViewBag.Poruka = "Greska";
+            return View();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }
